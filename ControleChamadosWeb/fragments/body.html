@@ -1,0 +1,88 @@
+
+<div class="container">
+	<h2>Chamados do dia</h2>
+	<p>The .table-hover class enables a hover state on table rows:</p>
+	<div ng-controller="Pessoa">            
+		<table class="table table-hover">
+			<thead>
+				<tr>	
+					<th></th>
+					<th>ID</th>
+					<th>Nome</th>
+					<th>Sobrenome</th>
+					<th>Email</th>
+					<th>Lotação</th>
+					<th>Sala</th>
+					<th>Opções</th>
+				</tr>
+			</thead>
+			
+			<tbody ng-repeat="pessoa in pessoas">
+				<tr>
+					<td><input type="radio" name="pessoa" id="{{pessoa.id}}" value="{{pessoa.id}}"></td>
+					<td>{{pessoa.id}}</td>
+					<td>{{pessoa.nome}}</td>
+					<td>{{pessoa.sobreNome}}</td>
+					<td>{{pessoa.email}}</td>
+					<td>{{pessoa.lotacao.departamento}}</td>
+					<td>{{pessoa.lotacao.sala}}</td>
+					<td ng-hide="{{!pessoa.isAdmin}}">
+						<button type="button" class="btn btn-xs btn-default">Ver</button>
+						<button type="button" class="btn btn-xs btn-default">Editar</button>
+						<button type="button" class="btn btn-xs btn-default">Excluir</button>
+					</td>
+				</tr>
+			</tbody>
+			
+		</table>
+	</div>
+	<div class="btn-group" role="group" aria-label="...">
+		<button type="button" class="btn btn-default" data-toggle="modal" data-target="#btnNovaPessoa"">Novo</button>
+	</div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="btnNovaPessoa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Adicionar Pessoa</h4>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div>
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="inputNome">Nome</label>
+									<input type="text" class="form-control" id="inputNome" placeholder="Nome">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="inputSobreNome">Sobrenome</label>
+									<input type="text" class="form-control" id="inputSobreNome" placeholder="Sobrenome">
+								</div>
+							</div>
+							<div ng-controller="Lotacao">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="inputNome">Lotação</label>
+									<div ng-repeat="lotacao in lotacoes"></div>
+									<select>{{pessoa.lotacao.sala}} {{pessoa.lotacao.departamento}}</select>
+								</div>
+							</div>
+							</div>
+						</div>
+					</div>
+				</form>	
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+				<button type="button" class="btn btn-primary">Salvar</button>
+			</div>
+		</div>
+	</div>
+</div>
